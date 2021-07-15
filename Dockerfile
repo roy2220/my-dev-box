@@ -21,7 +21,7 @@ RUN `#===== rpm packages ==============================`; \
     dnf clean all; \
     `#===== python packages ===========================`; \
     pip install pip-autoremove ydiff sshuttle pyyaml; \
-    `#===== node packages ===========================`; \
+    `#===== node packages =============================`; \
     npm install -g fx; \
     `#===== dotfiles ==================================`; \
     find ~ -mindepth 1 -name '*' -delete; \
