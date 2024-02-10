@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -eu${DEBUG+x}o pipefail
+
+OPERATION=${1}
+MDB_ID=${2}
+VOLUME=workspace-${MDB_ID}
+CONTAINER=my-dev-box-${MDB_ID}
+case "${OPERATION}" in
+add)
+	if ! command -v realpath >/dev/null 2>&1; then
+		realpath() {
+			python3 -c 'print(__import__("os").path.realpath(__import__("sys").argv[1]))' "${1}"
+		}
+	fi
+	DATA_DIR=$(dirname "$(realpath "${0}")")/data-${MDB_ID}
+	mkdir -p "${DATA_DIR}"
+	docker volume create "${VOLUME}"
+	docker create \
+		--name="${CONTAINER}" \
+		--hostname="${CONTAINER}" \
+		--volume=/var/run/docker.sock:/var/run/docker.sock \
+		--volume="${VOLUME}:/workspace" \
+		--volume="${DATA_DIR}:/data" \
+		--tty \
+		--interactive \
+		--privileged \
+		--net=host \
+		--workdir=/workspace \
+		ghcr.io/roy2220/my-dev-box
+	;;
+enter)
+	docker cp --quiet --follow-link /dev/stdin "${CONTAINER}:/tmp/zprofile" <<EOF
+export DOCKER_USER='${USER}'
+EOF
+	docker start --attach --detach-keys=ctrl-\\ --interactive "${CONTAINER}"
+	;;
+remove)
+	docker rm "${CONTAINER}"
+	;;
+*)
+	echo "unknown operation: ${OPERATION}"
+	;;
+esac
