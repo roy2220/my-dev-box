@@ -29,7 +29,7 @@ dnf clean all
 pip install pip-autoremove sshuttle pyyaml pure-protobuf bashlex
 
 # node packages
-npm install -g fx http-server
+npm install -g http-server
 
 # dotfiles
 find ~ -mindepth 1 -delete
