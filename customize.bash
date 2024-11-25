@@ -19,17 +19,15 @@ dnf install --assumeyes \
 	glibc-langpack-en findutils procps-ng psmisc iproute iputils iptables traceroute bind-utils lsof tcpdump diffutils patch unzip fuse3 cronie \
 	stow nmap-ncat socat lsyncd jq fd-find \
 	zsh vim tmux \
-	gcc gcc-c++ python-devel python-pip nodejs npm sqlite \
+	gcc gcc-c++ python-devel python-pip sqlite \
 	git make cmake the_silver_searcher cloc ShellCheck \
 	protobuf-compiler protobuf-devel \
 	autoconf automake `# for ctags`
 dnf clean all
 
 # python packages
-pip install pip-autoremove sshuttle pyyaml pure-protobuf bashlex
-
-# node packages
-npm install -g http-server
+pip install pip-autoremove sshuttle pyyaml pure-protobuf bashlex \
+	git+https://github.com/largecats/sparksql-formatter.git
 
 # dotfiles
 find ~ -mindepth 1 -delete
@@ -68,7 +66,6 @@ vim +PlugInstall +qall <<<$'\n\n\n'
 vim +PlugInstall +qall <<<$'\n\n\n'
 
 # cleanup
-rm --recursive --force "$(npm config get cache)"
 rm --recursive --force "$(go env GOCACHE)"
 rm --recursive --force "$(go env GOMODCACHE)"
 rm --recursive --force "$(pip cache dir)"
