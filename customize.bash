@@ -19,7 +19,7 @@ dnf install --assumeyes \
 	glibc-langpack-en findutils procps-ng psmisc iproute iputils iptables traceroute bind-utils lsof tcpdump diffutils patch unzip fuse3 cronie \
 	stow nmap-ncat socat lsyncd jq fd-find \
 	zsh vim tmux \
-	gcc gcc-c++ python-devel python-pip sqlite \
+	gcc gcc-c++ python-devel python-pip nodejs-npm sqlite \
 	git make cmake the_silver_searcher cloc ShellCheck \
 	protobuf-compiler protobuf-devel \
 	autoconf automake `# for ctags`
@@ -69,4 +69,5 @@ vim +PlugInstall +qall <<<$'\n\n\n'
 rm --recursive --force "$(go env GOCACHE)"
 rm --recursive --force "$(go env GOMODCACHE)"
 rm --recursive --force "$(pip cache dir)"
+rm --recursive --force "$(npm config get cache)"
 find /tmp -mindepth 1 -delete
