@@ -18,7 +18,7 @@ dnf autoremove --assumeyes
 dnf install --assumeyes \
 	glibc-langpack-en findutils procps-ng psmisc iproute iputils iptables traceroute bind-utils lsof tcpdump diffutils patch unzip fuse3 cronie \
 	stow nmap-ncat socat lsyncd jq fd-find \
-	zsh vim tmux \
+	zsh neovim tmux \
 	gcc gcc-c++ python-devel python-pip nodejs-npm sqlite \
 	git make cmake the_silver_searcher cloc ShellCheck \
 	protobuf-compiler protobuf-devel \
@@ -46,7 +46,7 @@ mkdir /gdrive
 	--drive-service-account-file=/tmp/gdrive_service_account.json \
 	/gdrive
 # shellcheck disable=SC2016
-find ~/.local/src -mindepth 1 -maxdepth 1 -type f ! -name '1-install-rclone.bash' -name '*-install-*.bash' -print0 |
+find -H ~/.local/src -mindepth 1 -maxdepth 1 -type f ! -name '1-install-rclone.bash' -name '*-install-*.bash' -print0 |
 	sort --zero-terminated | xargs --null --max-lines=1 \
 	-- bash -c 'echo "${@@Q}"; "${@}" || exit 255' \
 	-- bash
@@ -60,10 +60,10 @@ TERM=xterm-256color zsh -c \
 	'eval "$(sed -n '\''/^source ~\/\.zplug\/init\.zsh$/,/^zplug load$/p'\'' ~/.zshrc)" && zplug install' \
 	</dev/null
 
-# vim plugins
-vim +PlugInstall +qall <<<$'\n\n\n'
-vim +PlugInstall +qall <<<$'\n\n\n'
-vim +PlugInstall +qall <<<$'\n\n\n'
+# nvim plugins
+nvim --headless +PlugInstall +qall <<<$'\n\n\n'
+nvim --headless +PlugInstall +qall <<<$'\n\n\n'
+nvim --headless +PlugInstall +qall <<<$'\n\n\n'
 
 # cleanup
 rm --recursive --force "$(go env GOCACHE)"
