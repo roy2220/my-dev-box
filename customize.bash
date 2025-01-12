@@ -21,8 +21,7 @@ dnf install --assumeyes \
 	zsh neovim tmux \
 	gcc gcc-c++ python-devel python-pip nodejs-npm sqlite \
 	git make cmake the_silver_searcher cloc ShellCheck \
-	protobuf-compiler protobuf-devel \
-	autoconf automake `# for ctags`
+	protobuf-compiler protobuf-devel
 dnf clean all
 
 # python packages
