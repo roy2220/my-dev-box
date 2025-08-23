@@ -18,7 +18,16 @@ jobs:
     - uses: docker/build-push-action@v3
       with:
         context: .
-        platforms: linux/arm64,linux/amd64
+        platforms: linux/amd64
+        push: true
+        tags: ghcr.io/roy2220/my-dev-box:latest
+        allow: security.insecure
+        secrets: |
+          gdfuse_service_account_data=${{ secrets.GDFUSE_SERVICE_ACCOUNT_DATA }}
+    - uses: docker/build-push-action@v3
+      with:
+        context: .
+        platforms: linux/arm64
         push: true
         tags: ghcr.io/roy2220/my-dev-box:latest
         allow: security.insecure
