@@ -18,7 +18,9 @@ jobs:
     - uses: docker/build-push-action@v3
       with:
         context: .
-        platforms: linux/arm64
+        platforms:
+        - linux/arm64
+        - linux/amd64
         push: true
         tags: ghcr.io/roy2220/my-dev-box:latest
         allow: security.insecure
