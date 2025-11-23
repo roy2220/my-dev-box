@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1-labs
 
-FROM fedora:41
+FROM fedora:42
 
 ENV LANG=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8 \
