@@ -17,6 +17,8 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - uses: docker/build-push-action@v3
       with:
+        provenance: false # Disable provenance to avoid unknown/unknown
+        sbom: false       # Disable sbom to avoid unknown/unknown
         context: .
         platforms: linux/amd64
         push: true
@@ -26,6 +28,8 @@ jobs:
           gdfuse_service_account_data=${{ secrets.GDFUSE_SERVICE_ACCOUNT_DATA }}
     - uses: docker/build-push-action@v3
       with:
+        provenance: false # Disable provenance to avoid unknown/unknown
+        sbom: false       # Disable sbom to avoid unknown/unknown
         context: .
         platforms: linux/arm64
         push: true
