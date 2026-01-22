@@ -17,23 +17,19 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - uses: docker/build-push-action@v3
       with:
-        provenance: false # Disable provenance to avoid unknown/unknown
-        sbom: false       # Disable sbom to avoid unknown/unknown
         context: .
         platforms: linux/amd64
         push: true
-        tags: ghcr.io/roy2220/my-dev-box:latest
+        tags: ghcr.io/roy2220/my-dev-box:amd64
         allow: security.insecure
         secrets: |
           gdfuse_service_account_data=${{ secrets.GDFUSE_SERVICE_ACCOUNT_DATA }}
     - uses: docker/build-push-action@v3
       with:
-        provenance: false # Disable provenance to avoid unknown/unknown
-        sbom: false       # Disable sbom to avoid unknown/unknown
         context: .
         platforms: linux/arm64
         push: true
-        tags: ghcr.io/roy2220/my-dev-box:latest
+        tags: ghcr.io/roy2220/my-dev-box:arm64
         allow: security.insecure
         secrets: |
           gdfuse_service_account_data=${{ secrets.GDFUSE_SERVICE_ACCOUNT_DATA }}
