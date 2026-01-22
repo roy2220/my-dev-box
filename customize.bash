@@ -13,7 +13,7 @@ dnf upgrade --assumeyes
 # dnf install --assumeyes 'dnf-command(config-manager)' 'dnf-command(copr)'
 # dnf makecache
 dnf remove --assumeyes \
-	vi
+	vim-minimal
 dnf autoremove --assumeyes
 dnf install --assumeyes \
 	glibc-langpack-en findutils procps-ng psmisc iproute iputils iptables traceroute bind-utils lsof tcpdump diffutils patch unzip fuse3 cronie \
