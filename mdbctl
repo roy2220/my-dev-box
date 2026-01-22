@@ -33,7 +33,7 @@ enter)
 	ZPROFILE=$(mktemp)
 	cat >"${ZPROFILE}" <<EOF
 export DOCKER_HOST_OS='$(uname -s)'
-export DOCKER_HOST_USER='${USER}'
+export DOCKER_HOST_USER='$(whoami)'
 # export HTTP_PROXY=http://1.2.3.4:7890
 # export HTTPS_PROXY=http://1.2.3.4:7890
 EOF
