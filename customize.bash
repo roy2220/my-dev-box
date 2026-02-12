@@ -1,5 +1,17 @@
 set -euxo pipefail
 
+retry() {
+	local i
+	local n
+
+	n=${1}
+	shift
+	for ((i = 0; i <= n; i++)); do
+		"$@" && return 0
+	done
+	return 1
+}
+
 # proxy
 #export http_proxy=http://host.docker.internal:7890 \
 #	HTTP_PROXY=http://host.docker.internal:7890 \
@@ -31,7 +43,7 @@ pip install pip-autoremove sshuttle pyyaml pure-protobuf bashlex \
 # dotfiles
 find ~ -mindepth 1 -delete
 mkdir ~/.config
-git clone --depth 1 --recurse-submodules https://github.com/roy2220/dotfiles.git ~/.files
+retry 3 bash -c 'rm --recursive --force ~/.files; git clone --depth 1 --recurse-submodules https://github.com/roy2220/dotfiles.git ~/.files'
 # shellcheck disable=SC2011
 ls -1 ~/.files | xargs stow --dir ~/.files
 
@@ -52,12 +64,12 @@ find -H ~/.local/src -mindepth 1 -maxdepth 1 -type f ! -name '1-install-rclone.b
 PATH=/usr/local/go/bin:${PATH}
 
 # tmux plugins
-~/.tmux/plugins/tpm/bin/install_plugins
+retry 3 ~/.tmux/plugins/tpm/bin/install_plugins
 
 # zsh plugins
-TERM=xterm-256color zsh -c \
-	'eval "$(sed -n '\''/^source ~\/\.zplug\/init\.zsh$/,/^zplug load$/p'\'' ~/.zshrc)" && zplug install' \
-	</dev/null
+# shellcheck disable=SC2016
+retry 3 sh -c 'export TERM=xterm-256color; exec "${@}" </dev/null' -- \
+	zsh -c 'eval "$(sed -n '\''/^source ~\/\.zplug\/init\.zsh$/,/^zplug load$/p'\'' ~/.zshrc)" && zplug install'
 
 # nvim plugins
 nvim --headless +PlugInstall +qall <<<$'\n\n\n'
