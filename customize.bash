@@ -30,7 +30,7 @@ dnf autoremove --assumeyes
 dnf install --assumeyes \
 	glibc-langpack-en findutils procps-ng psmisc iproute iputils iptables traceroute bind-utils lsof tcpdump diffutils patch unzip fuse3 cronie \
 	stow nmap-ncat socat lsyncd jq fd-find \
-	zsh neovim tmux \
+	tmux zsh tree-sitter-cli which `# for neovim` \
 	gcc gcc-c++ binutils-gold python-devel python-pip nodejs-npm sqlite \
 	git make cmake the_silver_searcher cloc ShellCheck \
 	protobuf-compiler protobuf-devel
