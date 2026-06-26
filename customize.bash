@@ -22,8 +22,6 @@ retry() {
 # rpm packages
 dnf makecache
 dnf upgrade --assumeyes
-# dnf install --assumeyes 'dnf-command(config-manager)' 'dnf-command(copr)'
-# dnf makecache
 dnf remove --assumeyes \
 	vim-minimal
 dnf autoremove --assumeyes
@@ -77,8 +75,9 @@ nvim --headless +PlugInstall +qall <<<$'\n\n\n'
 nvim --headless +PlugInstall +qall <<<$'\n\n\n'
 
 # cleanup
-rm --recursive --force "$(go env GOCACHE)"
-rm --recursive --force "$(go env GOMODCACHE)"
-rm --recursive --force "$(pip cache dir)"
-rm --recursive --force "$(npm config get cache)"
+rm --recursive --force \
+	"$(go env GOCACHE)" \
+	"$(go env GOMODCACHE)" \
+	"$(pip cache dir)" \
+	"$(npm config get cache)"
 find /tmp -mindepth 1 -delete
