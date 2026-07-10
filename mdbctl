@@ -3,10 +3,11 @@
 set -eu${DEBUG+x}o pipefail
 
 OPERATION=${1}
-MDB_ID=${2}
-
-VOLUME=workspace-${MDB_ID}
-CONTAINER=my-dev-box-${MDB_ID}
+if [[ ${OPERATION} != pull ]]; then
+	MDB_ID=${2}
+	VOLUME=workspace-${MDB_ID}
+	CONTAINER=my-dev-box-${MDB_ID}
+fi
 IMAGE=ghcr.io/roy2220/my-dev-box:$(uname -m | sed -e 's/x86_64/amd64/g' -e 's/aarch64/arm64/g')
 
 case "${OPERATION}" in
@@ -37,8 +38,8 @@ enter)
 	cat >"${ZPROFILE}" <<EOF
 export DOCKER_HOST_OS='$(test -f /etc/wsl.conf && echo WSL || uname -s)'
 export DOCKER_HOST_USER='$(whoami)'
-# export HTTP_PROXY=http://1.2.3.4:7890
-# export HTTPS_PROXY=http://1.2.3.4:7890
+# export HTTP_PROXY=http://host.docker.internal:7890
+# export HTTPS_PROXY=http://host.docker.internal:7890
 EOF
 	docker cp --quiet "${ZPROFILE}" "${CONTAINER}:/tmp/zprofile"
 	rm "${ZPROFILE}"

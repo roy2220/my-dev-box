@@ -67,7 +67,7 @@ retry 3 ~/.tmux/plugins/tpm/bin/install_plugins
 # zsh plugins
 # shellcheck disable=SC2016
 retry 3 sh -c 'export TERM=xterm-256color; exec "${@}" </dev/null' -- \
-	zsh -c 'eval "$(sed -n '\''/^source ~\/\.zplug\/init\.zsh$/,/^zplug load$/p'\'' ~/.zshrc)" && zplug install'
+	zsh -c 'eval "$(sed --silent '\''/##### BEGIN PLUGINS #####/,/##### END PLUGINS #####/p'\'' ~/.zshrc)" && zplug install'
 
 # nvim plugins
 nvim --headless +PlugInstall +qall <<<$'\n\n\n'
