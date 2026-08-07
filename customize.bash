@@ -81,3 +81,5 @@ rm --recursive --force \
 	"$(pip cache dir)" \
 	"$(npm config get cache)"
 find /tmp -mindepth 1 -delete
+
+passwd -d root
