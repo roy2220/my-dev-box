@@ -26,7 +26,7 @@ dnf remove --assumeyes \
 	vim-minimal
 dnf autoremove --assumeyes
 dnf install --assumeyes \
-	glibc-langpack-en findutils procps-ng psmisc iproute iputils iptables traceroute bind-utils lsof tcpdump diffutils patch unzip fuse3 cronie \
+	glibc-langpack-en findutils procps-ng psmisc iproute iputils iptables traceroute bind-utils lsof tcpdump diffutils patch unzip fuse3 cronie dropbear \
 	stow nmap-ncat socat lsyncd jq fd-find prename \
 	tmux zsh neovim \
 	gcc gcc-c++ binutils-gold python-devel python-pip nodejs-npm sqlite \
