@@ -38,6 +38,9 @@ dnf clean all
 pip install pip-autoremove sshuttle pyyaml pure-protobuf bashlex \
 	git+https://github.com/largecats/sparksql-formatter.git
 
+# nodejs packages
+npm install -g @openai/codex @bitkyc08/opencodex
+
 # dotfiles
 find ~ -mindepth 1 -delete
 mkdir ~/.config
