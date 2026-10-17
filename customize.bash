@@ -26,12 +26,11 @@ dnf remove --assumeyes \
 	vim-minimal
 dnf autoremove --assumeyes
 dnf install --assumeyes \
-	glibc-langpack-en findutils procps-ng psmisc iproute iputils iptables traceroute bind-utils lsof tcpdump diffutils patch unzip fuse3 cronie dropbear \
-	stow nmap-ncat socat lsyncd jq fd-find prename \
+	glibc-langpack-en findutils procps-ng psmisc iproute iputils iptables traceroute bind-utils lsof tcpdump diffutils patch unzip fuse3 cronie \
+	stow nmap-ncat socat lsyncd jq fd-find prename dropbear par \
 	tmux zsh neovim \
 	gcc gcc-c++ binutils-gold python-devel python-pip nodejs-npm sqlite \
-	git make cmake the_silver_searcher cloc ShellCheck \
-	protobuf-compiler protobuf-devel
+	git make cmake the_silver_searcher cloc ShellCheck protobuf-compiler protobuf-devel
 dnf clean all
 
 # python packages
