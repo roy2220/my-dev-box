@@ -48,16 +48,8 @@ retry 3 bash -c 'rm --recursive --force ~/.files; git clone --depth 1 --recurse-
 ls -1 ~/.files | xargs stow --dir ~/.files
 
 # cli binaries
-bash ~/.local/src/1-install-rclone.bash
-base64 --decode </run/secrets/gdfuse_service_account_data >/tmp/gdrive_service_account.json
-mkdir /gdrive
-~/.local/bin/_rclone --config=/dev/null mount --daemon \
-	:drive: \
-	--drive-scope=drive \
-	--drive-service-account-file=/tmp/gdrive_service_account.json \
-	/gdrive
 # shellcheck disable=SC2016
-find -H ~/.local/src -mindepth 1 -maxdepth 1 -type f ! -name '1-install-rclone.bash' -name '*-install-*.bash' -print0 |
+find -H ~/.local/src -mindepth 1 -maxdepth 1 -type f -name '*-install-*.bash' -print0 |
 	sort --zero-terminated | xargs --null --max-lines=1 \
 	-- bash -c 'echo "${@@Q}"; "${@}" || exit 255' \
 	-- bash
