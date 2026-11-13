@@ -73,7 +73,8 @@ rm --recursive --force \
 	"$(go env GOCACHE)" \
 	"$(go env GOMODCACHE)" \
 	"$(pip cache dir)" \
-	"$(npm config get cache)"
+	"$(npm config get cache)" \
+	~/.bun
 find /tmp -mindepth 1 -delete
 
 passwd -d root
